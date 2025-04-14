@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      form {
+        border: 1px solid rgb(104, 104, 104);
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        padding: 22px;
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Consult Doctor Form</h1>
+      <form action="" id="book-form">
+        <h2>Your Detail</h2>
+        <div>
+          <label for="">First Name: </label>
+          <input type="text" name="firstname" id="firstname" required />
+        </div>
+        <br />
+        <div>
+          <label for="">Last Name: </label>
+          <input type="text" name="lastname" id="lastname" required />
+        </div>
+        <br />
+        <div>
+          <label for="">Email: </label>
+          <input type="email" name="email" id="email" required />
+        </div>
+        <br />
+        <div>
+          <label for="">Contact No: </label>
+          <input type="number" name="number" id="number" required />
+        </div>
+        <br />
+        <h2>Your doctor</h2>
+        <div>
+          <label for="cars">Choose a doctor:</label>
+          <select name="docter" id="docter" required>
+            <option value="">select option</option>
+            <option value="Dr. John">Dr. John</option>
+            <option value="Dr. Moscow">Dr. Moscow</option>
+            <option value="Dr. Hen">Dr. Hen</option>
+          </select>
+        </div>
+        <h2>Select meeting</h2>
+        <fieldset style="padding: 15px">
+          <legend>Choose Meeting</legend>
+          <input
+            type="radio"
+            name="meeting"
+            id="meeting"
+            value="GoogleMeet"
+            required
+          />Google Meet
+          <br />
+          <input
+            type="radio"
+            name="meeting"
+            id="offline"
+            value="Offline"
+            required
+          />Offline
+        </fieldset>
+        <h2>Select Time & Date</h2>
+        <div>
+          <label for="">Choose time: </label>
+          <input type="datetime-local" name="date" id="date" required />
+        </div>
+        <br />
+        <div>
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      // let arr = [];
+      // console.log(arr);
+
+      // // const loaddata = () => {
+      // //   const alldata = localStorage.getItem("data");
+      // //   if(alldata){
+      // //     arr = JSON.parse(alldata)
+      // //   }
+      // // }
+
+      // document.addEventListener("DOMContentLoaded", (e) => {
+      //   e.preventDefault();
+      //   // loaddata()
+
+      //   let firstname = document.getElementById("firstname");
+      //   let lastname = document.getElementById("lastname");
+      //   let email = document.getElementById("email");
+      //   let number = document.getElementById("number");
+      //   let docter = document.getElementById("docter");
+      //   let meeting = document.getElementById("meeting");
+      //   let Offline = document.getElementById("offline");
+      //   let date = document.getElementById("date");
+      //   let bookform = document.getElementById("book-form");
+
+      //   let obj = {
+      //     firstname: "",
+      //     lastname: "",
+      //     email: "",
+      //     number: "",
+      //     docter: "",
+      //     meeting: "",
+      //     date: "",
+      //   };
+
+      //   const handlechange = (e) => {
+      //     const { name, value } = e.target;
+      //     obj[name] = value;
+      //   };
+
+      //   const handledata = (e) => {
+      //     e.preventDefault();
+      //     if (obj.firstname.length < 3) {
+      //       alert("firstname required more than 5 character");
+      //     }
+      //     if (obj.lastname.length < 3) {
+      //       alert("lastname required more than 5 character");
+      //     }
+      //     if (obj.number.length < 10) {
+      //       alert("atleast required 10 digit");
+      //     }
+
+      //     firstname.value = "";
+      //     lastname.value = "";
+      //     email.value = "";
+      //     number.value = "";
+      //     docter.value = "";
+      //     meeting.value = "";
+      //     Offline.value = "";
+      //     date.value = "";
+      //     bookform.value = "";
+
+      //     arr.push(obj);
+
+      //     localStorage.setItem("data", JSON.stringify(arr));
+      //     alert("form submitted successfully");
+
+      //     console.log(arr);
+      //   };
+
+      //   firstname.addEventListener("input", handlechange);
+      //   lastname.addEventListener("input", handlechange);
+      //   email.addEventListener("input", handlechange);
+      //   number.addEventListener("input", handlechange);
+      //   docter.addEventListener("input", handlechange);
+      //   meeting.addEventListener("input", handlechange);
+      //   Offline.addEventListener("input", handlechange);
+      //   date.addEventListener("input", handlechange);
+      //   bookform.addEventListener("submit", handledata);
+      // });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #book-form input {
+        padding: 10px;
+      }
+      #book-form button {
+        padding: 10px;
+      }
+      #book-display-container {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Books Lister</h1>
+    <div>
+      <h2>Add Book</h2>
+      <form action="" id="book-form">
+        <input type="text" id="title" placeholder="title..." required />
+        <input type="text" id="author" placeholder="author..." required />
+        <input type="text" id="desc" placeholder="descreption..." required />
+        <input type="number" id="price" placeholder="price..." required />
+        <button type="submit">Add Book</button>
+      </form>
+      <div id="update-display-container"></div>
+      <div id="book-display-container"></div>
+    </div>
+
+    <script>
+      let allbooks = [];
+
+      const loaddata = () => {
+        const storeallbooks = localStorage.getItem("allbooks");
+        // console.log(storeallbooks);
+
+        if (storeallbooks) {
+          allbooks = JSON.parse(storeallbooks);
+        }
+
+        displaybook();
+      };
+      document.addEventListener("DOMContentLoaded", () => {
+        loaddata();
+        const bookFrom = document.getElementById("book-form");
+        bookFrom.addEventListener("submit", (e) => {
+          e.preventDefault();
+
+          // console.log(e.target);
+
+          let obj = {};
+
+          const title = document.getElementById("title");
+          const author = document.getElementById("author");
+          const desc = document.getElementById("desc");
+          const price = document.getElementById("price");
+
+          obj.id = Date.now();
+          obj.title = title.value;
+          obj.author = author.value;
+          obj.desc = desc.value;
+          obj.price = price.value;
+
+          if (obj.title && obj.author && obj.desc && obj.price) {
+            allbooks.push(obj);
+            title.value = "";
+            author.value = "";
+            desc.value = "";
+            price.value = "";
+            console.log(allbooks);
+
+            localStorage.setItem("allbooks", JSON.stringify(allbooks));
+          }
+          displaybook();
+        });
+      });
+
+      const displaybook = () => {
+        const bookdisplaycontainer = document.getElementById(
+          "book-display-container"
+        );
+
+        bookdisplaycontainer.innerHTML = "";
+
+        allbooks.forEach((ele) => {
+          const div = document.createElement("div");
+          div.style.border = "1px solid black";
+          div.style.marginBottom = "20px";
+
+          div.style.padding = "20px";
+          div.innerHTML += `
+    
+          <h2>TITLE: ${ele.title}</h2>
+          <h4>AUTHOR: ${ele.author}</h4>
+          <p>DESCRIPTION: ${ele.desc}</p>
+          <p>PRICE: ${ele.price}</p>
+          <button data-id="${ele.id}" id="edit-${ele.id}" onclick="editbook(${ele.id})" data-action="edit">Edit</button>
+          <button data-id="${ele.id}" id="delete-${ele.id}" onclick="deletebook(${ele.id})" data-action="delete">Delete</button>
+        `;
+          bookdisplaycontainer.appendChild(div);
+        });
+      };
+
+      const editbook = (id) => {
+        const idbybook = allbooks.find((ele) => ele.id === id);
+        console.log(idbybook);
+        const updatedisplaycontainer = document.getElementById(
+          "update-display-container"
+        );
+        updatedisplaycontainer.style.display = "block";
+        updatedisplaycontainer.innerHTML = "";
+        updatedisplaycontainer.style.marginBottom = "20px";
+        const div = document.createElement("div");
+        div.innerHTML = `
+        <h1>Update books details</h1    >
+        <input type="text" style="padding: 10px;" id="updatetitle" value="${idbybook.title}" placeholder="title..." required />
+        <input type="text" style="padding: 10px;" id="updateauthor" value="${idbybook.author}" placeholder="author..." required />
+        <input type="text" style="padding: 10px;" id="updatedesc" value="${idbybook.desc}" placeholder="descreption..." required />
+        <input type="number" style="padding: 10px;" id="updateprice" value="${idbybook.price}" placeholder="price..." required />
+        <button type="submit" style="padding: 10px;" onclick="updatebook(${idbybook.id})">Update Book</button>`;
+        updatedisplaycontainer.append(div);
+      };
+
+      const updatebook = (id) => {
+        const updatebookbyid = allbooks.find((ele) => {
+          return ele.id === id;
+        });
+
+        let updatetitle = document.getElementById("updatetitle");
+        let updateauthor = document.getElementById("updateauthor");
+        let updatedesc = document.getElementById("updatedesc");
+        let updateprice = document.getElementById("updateprice");
+
+        let utitle = updatetitle.value;
+        let uauthor = updatetitle.value;
+        let udesc = updatetitle.value;
+        let uprice = updatetitle.value;
+
+        updatebookbyid.title = utitle;
+        updatebookbyid.author = uauthor;
+        updatebookbyid.desc = udesc;
+        updatebookbyid.price = uprice;
+        localStorage.setItem("allbooks", JSON.stringify(allbooks));
+
+        updatetitle.value = "";
+        updateauthor.value = "";
+        updatedesc.value = "";
+        updateprice.value = "";
+        displaybook();
+      };
+
+      const deletebook = (id) => {
+        allbooks = allbooks.filter((ele) => ele.id !== id);
+        localStorage.setItem("allbooks", JSON.stringify(allbooks));
+
+        displaybook();
+        const updatedisplaycontainer = document.getElementById(
+          "update-display-container"
+        );
+        updatedisplaycontainer.style.display = "none";
+        return;
+      };
+    </script>
+  </body>
+</html>

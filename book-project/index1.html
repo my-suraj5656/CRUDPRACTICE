@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      #book-form input {
+        margin-bottom: 10px;
+        padding: 10px;
+      }
+      #book-form button {
+        margin-bottom: 10px;
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <h1>Form</h1>
+      <form action="" id="book-form">
+        <input
+          type="text"
+          id="title"
+          name="title"
+          placeholder="title..."
+          required
+        />
+        <br />
+        <input
+          type="text"
+          id="author"
+          name="author"
+          placeholder="author..."
+          required
+        />
+        <br />
+
+        <input
+          type="text"
+          id="desc"
+          name="desc"
+          placeholder="descreption..."
+          required
+        />
+        <br />
+
+        <input
+          type="number"
+          id="price"
+          name="price"
+          placeholder="price..."
+          required
+        />
+        <br />
+
+        <button type="submit">Add Book</button>
+      </form>
+    </div>
+
+    <script>
+      let dataarray = [];
+      console.log(dataarray);
+
+      document.addEventListener("DOMContentLoaded", (e) => {
+        const title = document.getElementById("title");
+        const author = document.getElementById("author");
+        const desc = document.getElementById("desc");
+        const price = document.getElementById("price");
+        const bookform = document.getElementById("book-form");
+
+        // console.log(title, author, desc, price, bookform);
+
+        let formdata = {
+          title: "",
+          author: "",
+          desc: "",
+          price: "",
+        };
+        const handlechange = (e) => {
+          const { name, value } = e.target;
+          // console.log(name, value);
+          formdata[name] = value;
+        };
+
+        const handledata = (e) => {
+          e.preventDefault();
+          dataarray.push(formdata);
+
+          (title.value = ""),
+            (author.value = ""),
+            (desc.value = ""),
+            (price.value = ""),
+            console.log(dataarray);
+          console.log(formdata);
+        };
+        title.addEventListener("input", handlechange);
+        author.addEventListener("input", handlechange);
+        desc.addEventListener("input", handlechange);
+        price.addEventListener("input", handlechange);
+        bookform.addEventListener("submit", handledata);
+      });
+    </script>
+    <script src="index1.js"></script>
+  </body>
+</html>
